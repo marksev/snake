@@ -41,7 +41,9 @@ class _SnakeGameState extends State<SnakeGame> {
   Direction direction = Direction.right;
   bool isGameRunning = false;
   bool isGameOver = false;
+  bool isPaused = false;
   int score = 0;
+  int bestScore = 0;
   Timer? gameTimer;
   
   final Random random = Random();
@@ -64,6 +66,7 @@ class _SnakeGameState extends State<SnakeGame> {
       direction = Direction.right;
       isGameRunning = true;
       isGameOver = false;
+      isPaused = false;
       score = 0;
     });
     _generateFood();
@@ -77,6 +80,17 @@ class _SnakeGameState extends State<SnakeGame> {
     gameTimer?.cancel();
     setState(() {
       isGameRunning = false;
+      isPaused = true;
+    });
+  }
+
+  void _resumeGame() {
+    setState(() {
+      isGameRunning = true;
+      isPaused = false;
+    });
+    gameTimer = Timer.periodic(const Duration(milliseconds: 200), (timer) {
+      _moveSnake();
     });
   }
 
@@ -87,6 +101,7 @@ class _SnakeGameState extends State<SnakeGame> {
       direction = Direction.right;
       isGameRunning = false;
       isGameOver = false;
+      isPaused = false;
       score = 0;
     });
     _generateFood();
@@ -137,6 +152,9 @@ class _SnakeGameState extends State<SnakeGame> {
       // Check food collision
       if (newHead == food) {
         score++;
+        if (score > bestScore) {
+          bestScore = score;
+        }
         _generateFood();
       } else {
         snake.removeLast();
@@ -149,6 +167,7 @@ class _SnakeGameState extends State<SnakeGame> {
     setState(() {
       isGameRunning = false;
       isGameOver = true;
+      isPaused = false;
     });
   }
 
@@ -187,6 +206,8 @@ class _SnakeGameState extends State<SnakeGame> {
             } else if (event.logicalKey == LogicalKeyboardKey.space) {
               if (isGameRunning) {
                 _pauseGame();
+              } else if (isPaused) {
+                _resumeGame();
               } else if (!isGameOver) {
                 _startGame();
               }
@@ -234,6 +255,15 @@ class _SnakeGameState extends State<SnakeGame> {
                       ),
                       const SizedBox(width: 16),
                       const Icon(Icons.emoji_events, color: Colors.amber, size: 24),
+                      const SizedBox(width: 8),
+                      Text(
+                        '$bestScore',
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -268,8 +298,14 @@ class _SnakeGameState extends State<SnakeGame> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
-                        onPressed: isGameRunning ? _pauseGame : _startGame,
-                        child: Text(isGameRunning ? 'Pause' : 'Start'),
+                        onPressed: isGameRunning
+                            ? _pauseGame
+                            : (isPaused ? _resumeGame : _startGame),
+                        child: Text(
+                          isGameRunning
+                              ? 'Pause'
+                              : (isPaused ? 'Resume' : 'Start'),
+                        ),
                       ),
                       ElevatedButton(
                         onPressed: _resetGame,
