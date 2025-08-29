@@ -174,8 +174,8 @@ class _SnakeGameState extends State<SnakeGame> {
       backgroundColor: const Color(0xFF4CAF50),
       body: Focus(
         autofocus: true,
-        onKey: (FocusNode node, RawKeyEvent event) {
-          if (event is RawKeyDownEvent) {
+        onKeyEvent: (FocusNode node, KeyEvent event) {
+          if (event is KeyDownEvent) {
             if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
               _changeDirection(Direction.up);
             } else if (event.logicalKey == LogicalKeyboardKey.arrowDown) {

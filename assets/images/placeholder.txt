@@ -1,0 +1,2 @@
+# Placeholder file for assets/images directory
+# This ensures the directory exists and prevents asset warnings during flutter pub get
