@@ -15,7 +15,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Snake Game',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: Colors.black,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.green,
+          brightness: Brightness.dark,
+        ),
         fontFamily: 'Arial',
         useMaterial3: true,
       ),
