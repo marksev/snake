@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
 import 'dart:math';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -50,12 +51,13 @@ class _SnakeGameState extends State<SnakeGame> {
   int score = 0;
   int bestScore = 0;
   Timer? gameTimer;
-  
+
   final Random random = Random();
 
   @override
   void initState() {
     super.initState();
+    _loadBestScore();
     _generateFood();
   }
 
@@ -159,12 +161,25 @@ class _SnakeGameState extends State<SnakeGame> {
         score++;
         if (score > bestScore) {
           bestScore = score;
+          _saveBestScore();
         }
         _generateFood();
       } else {
         snake.removeLast();
       }
     });
+  }
+
+  Future<void> _loadBestScore() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      bestScore = prefs.getInt('best_score') ?? 0;
+    });
+  }
+
+  Future<void> _saveBestScore() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('best_score', bestScore);
   }
 
   void _gameOver() {
