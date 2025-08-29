@@ -7,8 +7,8 @@ void main() {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyApp());
 
-    // Verify that the game starts with score 0
-    expect(find.text('0'), findsOneWidget);
+    // Verify that both current and best scores start at 0
+    expect(find.text('0'), findsNWidgets(2));
     
     // Verify that Start button is present
     expect(find.text('Start'), findsOneWidget);
