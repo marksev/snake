@@ -291,20 +291,31 @@ class _SnakeGameState extends State<SnakeGame> {
                 // Game Board
                 Expanded(
                   child: Center(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.brown, width: 4),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: CustomPaint(
-                        size: Size(
-                          boardSize * cellSize,
-                          boardSize * cellSize,
+                    child: GestureDetector(
+                      onTap: () {
+                        if (isGameRunning) {
+                          // Do nothing when the game is running
+                        } else if (isPaused) {
+                          _resumeGame();
+                        } else {
+                          _startGame();
+                        }
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.brown, width: 4),
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                        painter: GamePainter(
-                          snake: snake,
-                          food: food,
-                          cellSize: cellSize,
+                        child: CustomPaint(
+                          size: Size(
+                            boardSize * cellSize,
+                            boardSize * cellSize,
+                          ),
+                          painter: GamePainter(
+                            snake: snake,
+                            food: food,
+                            cellSize: cellSize,
+                          ),
                         ),
                       ),
                     ),
