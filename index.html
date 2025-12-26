@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CompTIA Security+ Practice Exam (500 Questions)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <section class="quiz-container" aria-live="polite">
+      <header class="quiz-header">
+        <h1>CompTIA Security+ Practice Exam (500 Questions)</h1>
+        <p class="quiz-subtitle">Test your knowledge across all SY0-701 domains.</p>
+      </header>
+      <div id="quiz-body" class="quiz-body">
+        <div id="question-number" class="question-number"></div>
+        <p id="question-text" class="question-text"></p>
+        <form id="options-form" class="options" aria-label="Answer choices"></form>
+        <div id="feedback" class="feedback" role="status"></div>
+        <div class="actions">
+          <button id="submit-btn" type="button">Submit Answer</button>
+          <button id="next-btn" type="button" disabled>Next Question</button>
+        </div>
+      </div>
+      <div id="results" class="results" hidden>
+        <h2>Exam Complete</h2>
+        <p id="score-text"></p>
+        <button id="restart-btn" type="button">Retake Quiz</button>
+      </div>
+    </section>
+  </main>
+  <script src="questions.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
