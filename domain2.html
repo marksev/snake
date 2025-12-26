@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domain 2 – Threats, Vulnerabilities & Mitigations | Security+ SY0-701</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-content">
+      <div class="logo">Security+ SY0-701 Coach</div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="exam-objectives.html">Objectives</a>
+        <a href="practice.html">Practice</a>
+        <a href="revision.html">Cheat Sheets</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <header class="page-header">
+      <p class="eyebrow">Domain 2</p>
+      <h1>Threats, Vulnerabilities & Mitigations</h1>
+      <p class="lead">Master how attacks work, how to spot weaknesses, and how to layer defenses in SOC, cloud, and enterprise environments.</p>
+    </header>
+
+    <section class="card">
+      <h2>Learning objectives</h2>
+      <ul class="bullet-list">
+        <li>Identify threat actors, motivations, resources, and attack surfaces.</li>
+        <li>Classify attacks: social engineering, malware, network, application, wireless, cloud, and supply chain.</li>
+        <li>Recognize vulnerability classes (misconfiguration, identity, injection, memory, crypto, firmware) and scanning outputs.</li>
+        <li>Apply mitigations: hardening, segmentation, patching, secure coding, detection, and response.</li>
+        <li>Translate findings into risk impact and priority for remediation.</li>
+      </ul>
+    </section>
+
+    <section class="lesson card">
+      <h3>Threat actor profiles</h3>
+      <p><strong>What</strong>: Adversaries include nation-states (resources, stealth), cybercriminals (financial motivation), hacktivists (ideology), insiders (intentional or accidental), and competitors.</p>
+      <p><strong>Why</strong>: Motivation and capability influence likelihood and TTPs. CompTIA often asks which control addresses a specific actor (e.g., DLP for insiders).</p>
+      <p><strong>Real examples</strong>: Ransomware gangs use double extortion; nation-states weaponize zero-days; insiders exfil data via cloud storage.</p>
+      <div class="callout">Diagram: Actor → Tactics (phishing, exploiting CVEs, living off the land) → Objectives (exfiltration, disruption, financial) → Controls (training, EDR, segmentation, UEBA, DLP).</div>
+      <div class="exam-tip">Match actor sophistication to mitigations: nation-state → behavior analytics + segmentation; script kiddie → patching + default credential removal.</div>
+    </section>
+
+    <section class="grid two lesson">
+      <div>
+        <h3>Attack categories</h3>
+        <ul class="bullet-list">
+          <li><strong>Social engineering</strong>: phishing, spear phishing, vishing, smishing, pretexting, baiting, tailgating. Mitigate with training, email security, MFA, visitor controls.</li>
+          <li><strong>Malware</strong>: ransomware, trojans, worms, fileless malware, logic bombs. Mitigate with EDR, application allowlisting, backups + offline copies, behavior detection.</li>
+          <li><strong>Network attacks</strong>: DDoS, MITM, ARP/DNS poisoning, spoofing, session hijacking. Mitigate with DDoS protection, segmentation, DHCP snooping/DAI, DNSSEC, HTTPS, VPN.</li>
+          <li><strong>Application attacks</strong>: SQLi, XSS, CSRF, command injection, insecure deserialization, API abuse. Mitigate with input validation, parameterized queries, output encoding, proper auth tokens, API gateways/WAF.</li>
+          <li><strong>Wireless</strong>: Evil twin/rogue AP, deauth attacks, Bluetooth (bluejacking/bluesnarfing), weak PSK. Mitigate with WPA3-Enterprise, 802.1X, wireless IDS, certificate-based auth.</li>
+          <li><strong>Cloud/supply chain</strong>: Misconfigured storage, IAM over-permissioned roles, dependency confusion, malicious updates. Mitigate with CIS benchmarks, least privilege, code signing, SBOM, vendor assessment.</li>
+        </ul>
+      </div>
+      <div class="card outline">
+        <h4>Exam trap watchlist</h4>
+        <ul class="bullet-list">
+          <li>Pharming redirects DNS; phishing is messaging-based.</li>
+          <li>Typosquatting (misspelled domain) vs domain hijacking (DNS takeover).</li>
+          <li>SQLi uses input fields; XSS impacts users’ browsers.</li>
+          <li>Deauthentication attacks force reconnects; evil twins mimic SSIDs to capture credentials.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="grid two lesson">
+      <div>
+        <h3>Vulnerabilities & scanning</h3>
+        <p><strong>What</strong>: Weaknesses such as unpatched CVEs, default credentials, open S3 buckets, missing TLS validation, buffer overflows, and improper error handling.</p>
+        <p><strong>How to identify</strong>: Vulnerability scans (credentialed/non-credentialed), configuration audits, code reviews, and penetration tests. Prioritize using CVSS, asset value, exploitability, exposure, and business context.</p>
+        <p><strong>Example</strong>: Scanner reports CVE with high CVSS and public exploit; asset stores PII. Mitigation priority = critical; apply patch, add WAF rule as compensating control, and validate after change window.</p>
+        <div class="exam-tip">If a scanner finds <em>missing patches</em> → remediate or compensate; if a finding is <em>false positive</em> → document and tune.</div>
+      </div>
+      <div class="card outline">
+        <h4>Mitigation building blocks</h4>
+        <ul class="bullet-list">
+          <li>Hardening baselines (CIS/STIG), secure configurations, and change control.</li>
+          <li>Identity security: MFA, RBAC/ABAC, conditional access, key rotation.</li>
+          <li>Network: segmentation, firewalls/WAF, NAC, VPN, zero trust with continuous verification.</li>
+          <li>Endpoint: EDR, allowlisting, disk encryption, secure boot, patch management.</li>
+          <li>App security: SDLC gates, SAST/DAST, code signing, secrets management.</li>
+          <li>Data: classification, DLP, tokenization, encryption in transit/at rest.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="grid two lesson">
+      <div>
+        <h3>Incident patterns & response</h3>
+        <p><strong>Scenario</strong>: Web app compromised via SQLi → attacker dumps database → ransomware deployed. Response: contain by disabling vulnerable form and isolating servers; eradicate with patches and reimages; recover from clean backups; communicate per IR plan.</p>
+        <p><strong>Why</strong>: CompTIA focuses on which step comes next. If evidence needed → collect first; if malware beaconing → isolate then eradicate.</p>
+      </div>
+      <div class="card outline">
+        <h4>Common traps</h4>
+        <ul class="bullet-list">
+          <li>Do not shut down a system during live response unless safety requires; isolate network instead.</li>
+          <li>Apply patches after validated backups exist.</li>
+          <li>Cloud misconfiguration fixes: tighten IAM + bucket policies, enable logging, use service control policies.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Summary</h2>
+      <p>Know the actor, attack path, impacted assets, and the mitigation that directly disrupts that path. Tie every vulnerability to business impact and prioritized remediation, mirroring SOC and cloud response playbooks.</p>
+    </section>
+
+    <section class="card">
+      <h2>Quick revision bullets</h2>
+      <ul class="checklist">
+        <li>Social engineering → training + MFA + email filtering.</li>
+        <li>SQLi → parameterized queries; XSS → output encoding; CSRF → anti-CSRF tokens + same-site cookies.</li>
+        <li>Wireless evil twin → 802.1X, mutual TLS, WIDS; deauth → management frame protection.</li>
+        <li>Misconfiguration → baselines, IaC, config scanning, least privilege.</li>
+        <li>Supply chain → SBOM, code signing, vendor risk assessments.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="logo">Security+ SY0-701 Coach</div>
+        <p class="muted">Map each attack to the control that directly stops or detects it.</p>
+      </div>
+      <div>
+        <h4>Next domains</h4>
+        <ul class="footer-links">
+          <li><a href="domain3.html">Domain 3: Security Architecture</a></li>
+          <li><a href="domain4.html">Domain 4: Security Operations</a></li>
+          <li><a href="domain5.html">Domain 5: Program Management</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
