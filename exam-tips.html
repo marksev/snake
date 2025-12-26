@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exam Tips & Traps | Security+ SY0-701</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-content">
+      <div class="logo">Security+ SY0-701 Coach</div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="practice.html">Practice</a>
+        <a href="revision.html">Cheat Sheets</a>
+        <a href="roadmap.html">Study Plans</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <header class="page-header">
+      <p class="eyebrow">Strategy</p>
+      <h1>Exam Tips & Common Traps</h1>
+      <p class="lead">Scenario-based questions reward process, safety, and least privilege. Use these tactics to avoid common pitfalls.</p>
+    </header>
+
+    <section class="grid two">
+      <div class="card">
+        <h3>Top tips</h3>
+        <ul class="checklist">
+          <li>Read the last sentence first to know what is being asked.</li>
+          <li>Map each option to CIA/AAA and business impact.</li>
+          <li>Preserve evidence and safety before eradication.</li>
+          <li>Prefer controls that directly address the stated risk (least privilege, segmentation, MFA).</li>
+          <li>Choose solutions that are feasible and policy-aligned.</li>
+        </ul>
+      </div>
+      <div class="card outline">
+        <h3>Time management</h3>
+        <ul class="bullet-list">
+          <li>Flag long PBQs; answer quick multiple-choice first.</li>
+          <li>Eliminate two wrong answers fast—look for overkill or irrelevant options.</li>
+          <li>Don’t leave blanks; there is no penalty for guessing.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="grid two lesson">
+      <div>
+        <h3>Common traps by domain</h3>
+        <ul class="bullet-list">
+          <li><strong>Domain 1</strong>: Confusing authentication vs authorization; forgetting that compensating controls are alternatives, not primary.</li>
+          <li><strong>Domain 2</strong>: Mixing phishing (messages) with pharming (DNS redirection); SQLi vs XSS; forgetting to enable MFA after password resets.</li>
+          <li><strong>Domain 3</strong>: Putting databases in DMZs; using ECB mode; assuming RBAC covers context—ABAC is for dynamic conditions.</li>
+          <li><strong>Domain 4</strong>: Wiping systems before collecting evidence; skipping containment; misunderstanding RPO vs RTO.</li>
+          <li><strong>Domain 5</strong>: Thinking compliance alone equals security; ignoring supply chain validation.</li>
+        </ul>
+      </div>
+      <div class="card outline">
+        <h3>Scenario playbook</h3>
+        <ol class="numbered">
+          <li>Identify the asset and impact (data, uptime, safety).</li>
+          <li>Identify the threat action (e.g., brute force, misconfig, malware).</li>
+          <li>Pick the control that directly blocks or detects that action.</li>
+          <li>Stay within policy and least privilege.</li>
+          <li>If incident: contain → eradicate → recover → lessons.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Memory aids</h2>
+      <ul class="bullet-list">
+        <li><strong>IR order</strong>: People Drink Cold Espresso Regularly (Prepare, Detect, Contain, Eradicate, Recover).</li>
+        <li><strong>Ports</strong>: 22 SSH, 53 DNS, 80/443 HTTP/S, 143/993 IMAP, 389/636 LDAP/LDAPS, 1812 RADIUS, 3389 RDP.</li>
+        <li><strong>Backup types</strong>: Full (all), Differential (since last full), Incremental (since last backup).</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="logo">Security+ SY0-701 Coach</div>
+        <p class="muted">Focus on the control that directly mitigates the described risk.</p>
+      </div>
+      <div>
+        <h4>Next</h4>
+        <ul class="footer-links">
+          <li><a href="revision.html">Final revision</a></li>
+          <li><a href="practice.html">Practice again</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

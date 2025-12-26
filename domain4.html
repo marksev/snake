@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domain 4 – Security Operations | Security+ SY0-701</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-content">
+      <div class="logo">Security+ SY0-701 Coach</div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="exam-objectives.html">Objectives</a>
+        <a href="practice.html">Practice</a>
+        <a href="revision.html">Cheat Sheets</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <header class="page-header">
+      <p class="eyebrow">Domain 4</p>
+      <h1>Security Operations</h1>
+      <p class="lead">Run day-to-day security: monitoring, incident response, digital forensics, automation, disaster recovery, and continuity.</p>
+    </header>
+
+    <section class="card">
+      <h2>Learning objectives</h2>
+      <ul class="bullet-list">
+        <li>Operate monitoring: SIEM, SOAR, UEBA, IDS/IPS, endpoint telemetry.</li>
+        <li>Execute incident response lifecycle: preparation, detection, analysis, containment, eradication, recovery, lessons learned.</li>
+        <li>Apply forensic principles: evidence handling, chain of custody, order of volatility, imaging.</li>
+        <li>Manage business continuity and disaster recovery: RPO/RTO, backup strategies, exercises.</li>
+        <li>Automate tasks and manage secure change/configuration.</li>
+      </ul>
+    </section>
+
+    <section class="grid two lesson">
+      <div>
+        <h3>Monitoring & detection</h3>
+        <p><strong>What</strong>: Collect and correlate logs/telemetry (network, endpoint, cloud) into SIEM; use UEBA for anomaly detection; deploy IDS/IPS for signature/behavior detection.</p>
+        <p><strong>Why</strong>: Faster mean time to detect and respond. Exam questions ask which log source or tool best detects a scenario (e.g., DNS logs for domain generation algorithms).</p>
+        <p><strong>Real world</strong>: SOC monitors firewall denies, EDR alerts, authentication anomalies. SOAR automations enrich indicators, open tickets, and quarantine hosts.</p>
+        <div class="exam-tip">If confidentiality of logs is implied → send over TLS; if integrity is critical → sign logs and use immutable storage.</div>
+      </div>
+      <div class="card outline">
+        <h4>Key metrics</h4>
+        <ul class="bullet-list">
+          <li>MTTD/MTTR (detect/respond time), alert fidelity, false positive rate.</li>
+          <li>Coverage: % of critical assets sending logs.</li>
+          <li>Playbook success rate in SOAR.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="grid two lesson">
+      <div>
+        <h3>Incident response flow</h3>
+        <ol class="numbered">
+          <li><strong>Preparation</strong>: IR plan, contacts, tools, baselines, tabletop exercises.</li>
+          <li><strong>Identification</strong>: Validate alerts, scope, severity, evidence collection.</li>
+          <li><strong>Containment</strong>: Short-term isolation (block IP, disable account), long-term fixes (patch, segmentation).</li>
+          <li><strong>Eradication</strong>: Remove malware, disable persistence, close vulnerabilities.</li>
+          <li><strong>Recovery</strong>: Restore services from clean backups, monitor closely, validate.</li>
+          <li><strong>Lessons learned</strong>: Post-incident review, update runbooks, improve controls.</li>
+        </ol>
+        <div class="exam-tip">Order matters. Collect evidence before wiping systems; isolate before eradication if active compromise.</div>
+      </div>
+      <div class="card outline">
+        <h4>Containment choices</h4>
+        <ul class="bullet-list">
+          <li><strong>Network</strong>: ACL changes, switch port shutdown, firewall blocks.</li>
+          <li><strong>Identity</strong>: Disable accounts, force resets, revoke tokens.</li>
+          <li><strong>Endpoint</strong>: Isolate via EDR, snapshot for forensics, kill processes.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="grid two lesson">
+      <div>
+        <h3>Forensics essentials</h3>
+        <p>Follow chain of custody, document timestamps, maintain integrity with hashes. Order of volatility: CPU registers → memory → network connections → disk → backups/logs.</p>
+        <p>Use write blockers for disk imaging; capture volatile data before powering off unless safety requires shutdown. Preserve original evidence and analyze copies.</p>
+        <div class="exam-tip">If ransomware is active and spreading, isolate network first; then acquire memory/disk if safe.</div>
+      </div>
+      <div class="card outline">
+        <h4>Evidence sources</h4>
+        <ul class="bullet-list">
+          <li>System logs (Windows Event, syslog), application logs.</li>
+          <li>Network captures/NetFlow, firewall/WAF logs.</li>
+          <li>Cloud audit trails (CloudTrail, Activity Logs), identity logs.</li>
+          <li>Endpoint artifacts: prefetch, registry, browser history, scheduled tasks.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="grid two lesson">
+      <div>
+        <h3>Business continuity & disaster recovery</h3>
+        <p><strong>BCP</strong> ensures essential functions continue; <strong>DRP</strong> restores IT after disruption. Define RPO (acceptable data loss) and RTO (acceptable downtime).</p>
+        <p><strong>Strategies</strong>: Hot/warm/cold sites, backups (full/diff/incremental, snapshots), replication (synchronous vs asynchronous), tabletop and full-interruption tests.</p>
+        <p><strong>Scenario</strong>: Data center fire—invoke DRP, fail over to warm site, restore from latest backups within RPO, verify integrity, conduct after-action review.</p>
+        <div class="exam-tip">If RPO is near-zero → choose synchronous replication or journaling; if budget is tight → cold site with longer RTO.</div>
+      </div>
+      <div class="card outline">
+        <h4>Change & configuration management</h4>
+        <ul class="bullet-list">
+          <li>Change advisory board approval, testing, rollback plans, and post-change validation.</li>
+          <li>Configuration baselines with version control; detect drift via scanning.</li>
+          <li>Automation (IaC) reduces human error and enforces repeatability.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Summary</h2>
+      <p>Operations is about consistency and repeatability: monitor effectively, respond in the right order, preserve evidence, and recover within business requirements. CompTIA will test sequencing and the most effective next step.</p>
+    </section>
+
+    <section class="card">
+      <h2>Quick revision bullets</h2>
+      <ul class="checklist">
+        <li>IR order: Prepare → Identify → Contain → Eradicate → Recover → Lessons.</li>
+        <li>Order of volatility: CPU → RAM → network → disk → backups.</li>
+        <li>RPO = data loss tolerance; RTO = downtime tolerance.</li>
+        <li>Collect evidence before wiping; isolate before eradication when active.</li>
+        <li>Use change control and baselines to prevent configuration drift.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="logo">Security+ SY0-701 Coach</div>
+        <p class="muted">Practice the right response order—most exam questions hinge on it.</p>
+      </div>
+      <div>
+        <h4>Last domain</h4>
+        <ul class="footer-links">
+          <li><a href="domain5.html">Domain 5: Program Management</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
